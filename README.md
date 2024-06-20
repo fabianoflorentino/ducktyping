@@ -1,17 +1,5 @@
 # Duck Typing
 
-## Interface
-
-Define a interface com um método process. Ele não faz nada além de levantar um erro se não for implementado.
-
-```ruby
-module PaymentProcessor
-  def processor(amount)
-    raise NotImplementedError, 'You must implement the processor method'
-  end
-end
-```
-
 ## Classes Concretas
 
 Implementam a interface PaymentProcessor com sua lógica específica.
@@ -32,6 +20,16 @@ end
 class PaypalProcessor
   def process(amount)
     return "Processing payment of #{amount} using Paypal"
+  end
+end
+```
+
+- **CreditCardProcessor**
+
+```ruby
+class CreditCardProcessor
+  def process(amount)
+    return "Processing payment of #{amount} using Credit Card"
   end
 end
 ```
@@ -59,16 +57,21 @@ Mostra como você pode alternar facilmente entre diferentes implementações do 
 ```ruby
 require_relative 'stripe_processor'
 require_relative 'paypal_processor'
+require_relative 'credit_processor'
 require_relative 'payment_service'
 
 stripe_processor = StripeProcessor.new
 paypal_processor = PayPalProcessor.new
+credit_processor = CreditCardProcessor.new
 
 service = PaymentService.new(stripe_processor)
 puts service.make_payment(100)
 
 service = PaymentService.new(paypal_processor)
 puts service.make_payment(200)
+
+credit = PaymentService.new(credit_processor)
+puts credit.make_payment(300)
 ```
 
 ```shell
@@ -76,4 +79,5 @@ ruby main.rb
 
 Processing payment of 100 using Stripe
 Processing payment of 200 using PayPal
+Processing payment of 300 using Credit Card
 ```
