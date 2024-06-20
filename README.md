@@ -70,3 +70,10 @@ puts service.make_payment(100)
 service = PaymentService.new(paypal_processor)
 puts service.make_payment(200)
 ```
+
+```shell
+ruby main.rb
+
+Processing payment of 100 using Stripe
+Processing payment of 200 using PayPal
+```
