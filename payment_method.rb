@@ -1,9 +1,9 @@
-class PaymentService
+class PaymentMethod
   def initialize(processor)
     @processor = processor
   end
 
-  def make_payment(amount)
+  def process_method(amount)
     @processor.process(amount)
   end
 end
