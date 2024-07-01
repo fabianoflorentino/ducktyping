@@ -2,7 +2,7 @@
 
 ## Classes Concretas
 
-Implementam a interface PaymentProcessor com sua lógica específica.
+Classes concretas que implementam o método que será usado pela classe que recebe o processador.
 
 - **StripeProcessor**
 
