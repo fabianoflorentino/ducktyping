@@ -39,7 +39,7 @@ end
 Recebe um processador que obedece à interface PaymentProcessor. Ele chama o método process do processador, independente de qual classe concreta está sendo usada.
 
 ```ruby
-class PaymentService
+class PaymentMethod
   def initialize(processor)
     @processor = processor
   end
@@ -64,14 +64,14 @@ stripe_processor = StripeProcessor.new
 paypal_processor = PayPalProcessor.new
 credit_processor = CreditCardProcessor.new
 
-service = PaymentService.new(stripe_processor)
-puts service.make_payment(100)
+stripe = PaymentMethod.new(stripe_processor)
+puts stripe.make_payment(100)
 
-service = PaymentService.new(paypal_processor)
-puts service.make_payment(200)
-
-credit = PaymentService.new(credit_processor)
+credit = PaymentMethod.new(credit_processor)
 puts credit.make_payment(300)
+
+paypal = PaymentMethod.new(paypal_processor)
+puts paypal.make_payment(200)
 ```
 
 ```shell
